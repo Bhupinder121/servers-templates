@@ -13,7 +13,7 @@ let clientResponseRef;
 
 
 app.get('/*', (req, res) =>{
-    let pathname = url.parse(req.url).pathname;
+    let pathname = req.url;
     let obj = {
         Pathname : pathname,
         method : "get", 
@@ -24,7 +24,7 @@ app.get('/*', (req, res) =>{
 });
 
 app.post('/*', (req, res) =>{
-    let pathname = url.parse(req.url).pathname;
+    let pathname = req.url;
     let obj = {
         Pathname : pathname,
         method : "post", 
