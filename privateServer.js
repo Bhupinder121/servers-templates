@@ -1,4 +1,4 @@
-let socketServerUrl = "http://192.168.0.118:4068";
+let socketServerUrl = "https://server-tesl.herokuapp.com";
 let privateServer = "http://192.168.0.118:3000";
 
 let socket = require('socket.io-client')(socketServerUrl);
