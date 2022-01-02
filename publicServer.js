@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
     });
 });
 
-let port = process.env.YOUR_PORT || process.env.PORT || 4068;
+let port = process.env.YOUR_PORT || process.env.PORT;
 
 httpSever.listen(port, ()=>{
     console.log("listening on "+ port);
