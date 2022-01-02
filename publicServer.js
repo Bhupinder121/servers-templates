@@ -7,7 +7,7 @@ let app = express();
 let httpSever = http.createServer(app);
 let io  = socket(httpSever);
 
-app.use(body())
+app.use(body.json())
 
 let clientResponseRef;
 
