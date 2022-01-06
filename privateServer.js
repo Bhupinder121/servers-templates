@@ -1,5 +1,6 @@
-let socketServerUrl = "https://tesl-server.herokuapp.com";
-let privateServer = "http://192.168.0.118:3000";
+// let socketServerUrl = "https://tesl-server.herokuapp.com";
+let socketServerUrl = "http://192.168.0.118:4068"
+let privateServer = "http://192.168.0.118:420";
 
 let socket = require('socket.io-client')(socketServerUrl);
 const superagent = require('superagent');
@@ -15,10 +16,9 @@ socket.on('disconnect', function(){
 socket.on("page-request", function(data){
     let path = data.Pathname;
     let method = data.method;
-    let params = data.params;
+    let params = data.query;
 
     let serverURL = privateServer + path;
-    
     if(method == "get"){
         executeGet(serverURL, params);
     }
