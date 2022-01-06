@@ -1,6 +1,6 @@
 const express = require('express');
 const socket = require('socket.io');
-const http = require('http');
+
 var body = require('body-parser');
 
 
@@ -8,13 +8,12 @@ let port = process.env.YOUR_PORT || process.env.PORT || 4068;
 
 let app = express();
 
-
-
 let server = app.listen(port, ()=>{
     console.log('listening on port 420');
 });
 
 let io  = socket(server);
+
 
 app.use(body.json())
 
