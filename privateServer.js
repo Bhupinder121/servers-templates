@@ -1,5 +1,13 @@
+var os = require('os');
+var ip = require('ip');
+let address = os.networkInterfaces()["Ethernet"][1]['address'];
+// let address = ip.address();
+
 let socketServerUrl = "https://tesl-server.herokuapp.com";
-let privateServer = "http://192.168.0.118:3000";
+let remainderServer = "http://"+address+":421";
+let financeServer = "http://"+address+":420";
+
+
 
 let socket = require('socket.io-client')(socketServerUrl);
 const superagent = require('superagent');
@@ -15,9 +23,13 @@ socket.on('disconnect', function(){
 socket.on("page-request", function(data){
     let path = data.Pathname;
     let method = data.method;
-    let params = data.params;
-
-    let serverURL = privateServer + path;
+    let params = data.query.data_query;
+    let serverName = data.query.server;
+    let serverURL = remainderServer + path;
+    console.log(serverName, params);
+    if(serverName == "finance"){
+        serverURL = financeServer + path;
+    }
     
     if(method == "get"){
         executeGet(serverURL, params);
@@ -32,7 +44,7 @@ function executeGet(serverURL, params){
     .query(params)
     .end((err, response)=>{
         if(err){
-            console.log("err");
+            console.log(err);
         }
         else{
             socket.emit('page-response', response.text);
