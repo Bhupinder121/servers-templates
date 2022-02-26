@@ -26,7 +26,10 @@ socket.on("page-request", function(data){
     let params = data.query.data_query;
     let serverName = data.query.server;
     let serverURL = remainderServer + path;
-    console.log(serverName, params);
+    
+    if(method == "post"){
+        serverName = data.query.nameValuePairs.server;
+    }
     if(serverName == "finance"){
         serverURL = financeServer + path;
     }
@@ -35,6 +38,7 @@ socket.on("page-request", function(data){
         executeGet(serverURL, params);
     }
     else if(method == "post"){
+        params = data.query;
         executePost(serverURL, params);
     }
 });
